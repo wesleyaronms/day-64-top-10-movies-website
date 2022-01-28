@@ -1,0 +1,26 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
+
+{% block title %}Select Movie{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="heading">Select Movie</h1>
+<!-- A função search_movies retorna uma lista de filmes. E para cada filme: self[0] == título,
+self[1] == ano, self[2] == descrição, self[3] == média de votos, self[4] == imagem -->
+  {% for movie in movies %}
+    <p>
+      <a href="{{ url_for('select', title=movie[0], year=movie[1],
+                  descr=movie[2], rating=movie[3], img=movie[4]) }}">
+        {{ movie[0] }} - {{ movie[1] }}</a>
+    </p>
+  {% endfor %}
+</div>
+{% endblock %}
